@@ -26,6 +26,8 @@ async function main() {
   });
 
   client.on('message', async (message) => {
+    if (message.author.bot) return;
+
     if (message.content === '$train') {
       message.channel.send('Starting training..');
       const messages = await fetchMessages(message);
