@@ -120,8 +120,8 @@ export class SqLiteTrainingModel implements TrainingModel {
             count: row.count,
             entity: row.entity,
             sequence: JSON.parse(row.sequence),
-            is_start: row.is_starter ? true : false,
-            is_end: row.is_ender ? true : false,
+            is_start: row.is_start ? true : false,
+            is_end: row.is_end ? true : false,
             token: row.token,
           });
         },
@@ -151,8 +151,8 @@ export class SqLiteTrainingModel implements TrainingModel {
             count: row.count,
             entity: row.entity,
             sequence: JSON.parse(row.sequence),
-            is_start: row.is_starter ? true : false,
-            is_end: row.is_ender ? true : false,
+            is_start: row.is_start ? true : false,
+            is_end: row.is_end ? true : false,
             token: row.token,
           });
         },
