@@ -1,47 +1,48 @@
 {
   "name": "cursed_markov_bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A cursed Markov_Chains Discord bot.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "jest",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/azuradara/cursed_markov_bot.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Aymane Dara Hlamnach <dara-@outlook.jp>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/azuradara/cursed_markov_bot/issues"
   },
   "homepage": "https://github.com/azuradara/cursed_markov_bot#readme",
   "devDependecies": {
-    "@types/node": "^12.12.21",
-    "@types/node-schedule": "^1.3.0",
-    "@types/ws": "^7.2.7",
-    "@typescript-eslint/eslint-plugin": "^2.13.0",
-    "@typescript-eslint/parser": "^2.13.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.4"
+    "@types/dotenv": "^6.1.0",
+    "@types/jest": "^23.3.10",
+    "@types/lodash": "^4.14.119",
+    "@types/natural": "^0.2.33",
+    "@types/pino": "^5.8.3",
+    "@types/sqlite3": "^3.1.3",
+    "@types/weighted": "0.0.5",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.2.2"
   },
   "eslintIgnore": [
     "**/*.js"
   ],
   "dependencies": {
-    "bufferutil": "^4.0.1",
-    "discord.js": "^12.3.1",
-    "erlpack": "^0.1.3",
-    "markov-strings": "^3.0.1",
-    "node-schedule": "^1.3.2",
-    "source-map-support": "^0.5.16",
-    "zlib-sync": "^0.1.7"
+    "discord.js": "^11.4.2",
+    "dotenv": "^6.2.0",
+    "lodash": "^4.17.11",
+    "natural": "^0.6.2",
+    "pino": "^5.10.1",
+    "sqlite3": "^4.0.4",
+    "weighted": "^0.3.0"
   }
 }
