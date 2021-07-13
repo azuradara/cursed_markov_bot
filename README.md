@@ -6,8 +6,8 @@ Discord bot using markov-strings to generate fake messages based on how users ty
 
 ### Windows
 1. Install Node.js >= 12.0
-2. 
-3. Clone this repository using git 
+ 
+2. Clone this repository using git 
 ```cmd
 git clone https://github.com/azuradara/cursed_markov_bot.git
 ```
