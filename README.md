@@ -1,5 +1,5 @@
 # A Discord Markov chains server
-Discord bot using markov-strings to generate fake messages based on how users type.
+Discord bot using `natural` and `weighted` to generate fake messages based on how users type.
 
 ## Setup
 - Create a [Discord bot application](https://discordapp.com/developers/applications/).
