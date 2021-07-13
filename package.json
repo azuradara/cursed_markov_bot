@@ -44,5 +44,10 @@
     "pino": "^5.10.1",
     "sqlite3": "^4.0.4",
     "weighted": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.171",
+    "@types/natural": "^2.1.2",
+    "@types/weighted": "^0.3.0"
   }
 }
