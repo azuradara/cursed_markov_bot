@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/azuradara/cursed_markov_bot#readme",
   "devDependecies": {
-    "@types/dotenv": "^6.1.0",
     "@types/jest": "^23.3.10",
     "@types/lodash": "^4.14.119",
     "@types/natural": "^0.2.33",
@@ -38,6 +37,7 @@
     "**/*.js"
   ],
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
     "discord.js": "^11.4.2",
     "dotenv": "^6.2.0",
     "lodash": "^4.17.11",
@@ -47,7 +47,6 @@
     "weighted": "^0.3.0"
   },
   "devDependencies": {
-    "@types/dotenv": "^8.2.0",
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.171",
     "@types/natural": "^2.1.2",

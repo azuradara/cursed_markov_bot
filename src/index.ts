@@ -1,9 +1,9 @@
 import Discord from 'discord.js';
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 import pino from 'pino';
 
-import { MarkovChain } from './lib/MarkovChain';
-import { SqLiteTrainingModel } from './lib/models/SqliteTrainingModel';
+import { MarkovChain } from './lib/MarkovChain.js';
+import { SqLiteTrainingModel } from './lib/models/SqliteTrainingModel.js';
 
 async function main() {
   dotenv.config();

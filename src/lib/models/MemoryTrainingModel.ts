@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { TrainingModel, Limit } from '../interfaces/TrainingModel';
+import { TrainingModel, Limit } from '../interfaces/TrainingModel.js';
 
 export class MemoryTrainingModel implements TrainingModel {
   private limits: Limit[] = [];

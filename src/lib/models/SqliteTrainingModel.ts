@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import { Limit, TrainingModel } from '../interfaces/TrainingModel';
+import { Limit, TrainingModel } from '../interfaces/TrainingModel.js';
 
 export class SqLiteTrainingModel implements TrainingModel {
   private readonly db: sqlite3.Database;

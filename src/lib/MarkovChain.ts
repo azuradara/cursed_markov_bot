@@ -1,7 +1,7 @@
 import _, { uniq } from 'lodash';
 import natural from 'natural';
 import weighted from 'weighted';
-import { TrainingModel } from './interfaces/TrainingModel';
+import { TrainingModel } from './interfaces/TrainingModel.js';
 
 export class MarkovChain {
   private tk = new natural.RegexpTokenizer({ pattern: /\s/ });
