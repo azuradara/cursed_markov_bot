@@ -2,6 +2,7 @@ import Discord from 'discord.js';
 import dotenv from 'dotenv';
 import pino from 'pino';
 
+import { fetchMessages } from './lib/helpers/messageHelpers.js';
 import { MarkovChain } from './lib/MarkovChain.js';
 import { SqLiteTrainingModel } from './lib/models/SqliteTrainingModel.js';
 
@@ -25,7 +26,21 @@ async function main() {
   });
 
   client.on('message', async (message) => {
-    if (message.isMentioned(client.user)) {
+    if (message.content === '$train') {
+      message.channel.send('Starting training..');
+      const messages = await fetchMessages(message);
+
+      messages.forEach((msg) => {
+        markov.train(
+          msg.id,
+          msg.authorId,
+          msg.content,
+          Number(process.env.MARKOV_CHAIN_ORDER)
+        );
+      });
+    }
+
+    if (message.content.startsWith('$ ')) {
       const entity = message.mentions.users.find((user) => {
         return user.bot === false;
       });
