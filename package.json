@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A cursed Markov_Chains Discord bot.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -46,9 +47,11 @@
     "weighted": "^0.3.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.171",
     "@types/natural": "^2.1.2",
+    "@types/pino": "^6.3.9",
     "@types/sqlite3": "^3.1.7",
     "@types/weighted": "^0.3.0",
     "jest": "^27.0.6",
