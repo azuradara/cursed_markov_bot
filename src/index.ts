@@ -40,7 +40,7 @@ async function main() {
       });
     }
 
-    if (message.content.startsWith('$ ')) {
+    if (message.content.startsWith('$')) {
       const entity = message.mentions.users.find((user) => {
         return user.bot === false;
       });
@@ -58,7 +58,16 @@ async function main() {
           logger.warn(e);
         }
       } else {
-        message.channel.send('Invalid mention.');
+        try {
+          const m = await markov.agnosticConcoct(
+            [],
+            Number(process.env.MARKOV_CHAIN_ORDER)
+          );
+          message.channel.send(m);
+        } catch (e) {
+          message.channel.send('# idk what happened bro just try again');
+          logger.warn(e);
+        }
       }
     } else {
       markov.train(

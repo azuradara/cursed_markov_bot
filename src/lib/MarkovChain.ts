@@ -66,6 +66,65 @@ export class MarkovChain {
     });
   }
 
+  public agnosticConcoct(chain: string[], order: number): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      if (_.isEmpty(chain)) {
+        try {
+          const start_frags = await this.model.getEntityAgnosticStartFrags();
+          const sample = _.sample(start_frags);
+
+          if (sample) {
+            try {
+              return resolve(
+                await this.agnosticConcoct(
+                  sample.sequence.concat(sample.token),
+                  order
+                )
+              );
+            } catch (e) {
+              return reject(e);
+            }
+          } else {
+            return reject(new Error('No starter fragments found.'));
+          }
+        } catch (e) {
+          return reject(e);
+        }
+      }
+
+      try {
+        const appendices = await this.model.getEntityAgnosticNextFrags(
+          chain.slice(1 - order)
+        );
+
+        if (_.isEmpty(appendices)) {
+          return reject(new Error('No sequences to append.'));
+        } else {
+          // idk
+          const weights = appendices.map((limit) => {
+            return limit.count;
+          });
+
+          const appendix = weighted.select(appendices, weights);
+
+          if (appendix.is_end) {
+            return resolve(chain.concat(appendix.token).join(' '));
+          } else {
+            try {
+              return resolve(
+                await this.agnosticConcoct(chain.concat(appendix.token), order)
+              );
+            } catch (e) {
+              return resolve(e);
+            }
+          }
+        }
+      } catch (e) {
+        return reject(e);
+      }
+    });
+  }
+
   public concoct(
     entity: string,
     chain: string[],

@@ -163,4 +163,64 @@ export class SqLiteTrainingModel implements TrainingModel {
       );
     });
   }
+
+  public getEntityAgnosticStartFrags(): Promise<Limit[]> {
+    return new Promise((resolve, reject) => {
+      const start_frags: Limit[] = [];
+
+      this.db.each(
+        `
+        SELECT * FROM llimit WHERE
+        is_start = 1 AND
+        is_end = 0
+      `,
+        (err, row) => {
+          if (err) return reject(err);
+
+          start_frags.push({
+            count: row.count,
+            entity: row.entity,
+            sequence: JSON.parse(row.sequence),
+            is_start: row.is_start ? true : false,
+            is_end: row.is_end ? true : false,
+            token: row.token,
+          });
+        },
+        (err) => {
+          if (err) return reject(err);
+          else return resolve(start_frags);
+        }
+      );
+    });
+  }
+
+  public getEntityAgnosticNextFrags(sequence: string[]): Promise<Limit[]> {
+    return new Promise((resolve, reject) => {
+      const appendices: Limit[] = [];
+
+      this.db.each(
+        `
+        SELECT * FROM llimit WHERE
+        sequence = ?
+      `,
+        JSON.stringify(sequence),
+        (err, row) => {
+          if (err) return reject(err);
+
+          appendices.push({
+            count: row.count,
+            entity: row.entity,
+            sequence: JSON.parse(row.sequence),
+            is_start: row.is_start ? true : false,
+            is_end: row.is_end ? true : false,
+            token: row.token,
+          });
+        },
+        (err) => {
+          if (err) return reject(err);
+          else return resolve(appendices);
+        }
+      );
+    });
+  }
 }
