@@ -12,7 +12,7 @@ export const fetchMessages = async (
     const messageCollection: Discord.Collection<string, Discord.Message> =
       await message.channel.messages.fetch({
         before: oldestMessageId,
-        limit: 5,
+        limit: 100,
       });
 
     const filteredMessages = messageCollection
@@ -31,7 +31,7 @@ export const fetchMessages = async (
     const lastMessage = messageCollection.last();
     // console.log(messageCollection.size);
     console.log('cached', cache.length, 'messages..');
-    if (!lastMessage || messageCollection.size < 5 || cache.length > 10000) {
+    if (!lastMessage || messageCollection.size < 100 || cache.length > 100000) {
       keepOn = false;
     } else {
       oldestMessageId = lastMessage.id;
