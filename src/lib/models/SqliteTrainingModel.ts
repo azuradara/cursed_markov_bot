@@ -12,8 +12,8 @@ export class SqLiteTrainingModel implements TrainingModel {
     return new Promise((resolve, reject) => {
       this.db.exec(
         `
-        CREATE TABLE IF NOT EXISTS limt (
-          id INTEGER PRIMARY KEY AUTOINCEREMENT,
+        CREATE TABLE IF NOT EXISTS llimit (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
           count INTEGER NOT NULL,
           is_start INTEGER NOT NULL,
           is_end INTEGER NOT NULL,
@@ -21,7 +21,7 @@ export class SqLiteTrainingModel implements TrainingModel {
           sequence TEXT NOT NULL,
           token TEXT NOT NULL,
 
-          CONSTRAINT limit_unique UNIQUE (is_end, entity, sequence, is_start, token)
+          CONSTRAINT llimit UNIQUE (is_end, entity, sequence, is_start, token)
         );
       `,
         (err) => {
@@ -73,7 +73,7 @@ export class SqLiteTrainingModel implements TrainingModel {
 
       this.db.run(
         `
-        INSERT INTO limit (count, is_end, entity, sequence, is_start, token)
+        INSERT INTO llimit (count, is_end, entity, sequence, is_start, token)
         VALUES(1, ?, ?, ?, ?, ?)
         ON CONFLICT(is_end, entity, sequence, is_start, token)
         DO UPDATE SET count = count + 1;
@@ -89,7 +89,7 @@ export class SqLiteTrainingModel implements TrainingModel {
           if (err) return reject(err);
 
           this.db.run(
-            `UPDATE latest_uniq_frag SET frag = ?;`,
+            `UPDATE latest_uniq_frag SET uniq_frag = ?;`,
             uniq_frag,
             (err) => {
               if (err) return reject(err);
@@ -107,7 +107,7 @@ export class SqLiteTrainingModel implements TrainingModel {
 
       this.db.each(
         `
-        SELECT * FROM limit WHERE
+        SELECT * FROM llimit WHERE
         is_start = 1 AND
         is_end = 0 AND
         entity= ?
@@ -139,7 +139,7 @@ export class SqLiteTrainingModel implements TrainingModel {
 
       this.db.each(
         `
-        SELECT * FROM limit WHERE
+        SELECT * FROM llimit WHERE
         sequence = ? AND
         entity = ?
       `,
