@@ -31,7 +31,11 @@ export const fetchMessages = async (
     const lastMessage = messageCollection.last();
     // console.log(messageCollection.size);
     console.log('cached', cache.length, 'messages..');
-    if (!lastMessage || messageCollection.size < 100 || cache.length > 100000) {
+    if (
+      !lastMessage ||
+      messageCollection.size < 100 ||
+      cache.length > 1_000_000
+    ) {
       keepOn = false;
     } else {
       oldestMessageId = lastMessage.id;
