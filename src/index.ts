@@ -2,6 +2,9 @@ import Discord from 'discord.js';
 import dotenv from 'dotenv';
 import pino from 'pino';
 
+// TODO: make the model and the chain return a static instance of themselves
+// make constructor private
+
 import { fetchMessages } from './lib/helpers/messageHelpers.js';
 import { MarkovChain } from './lib/MarkovChain.js';
 import { SqLiteTrainingModel } from './lib/models/SqliteTrainingModel.js';
@@ -30,16 +33,7 @@ async function main() {
 
     if (message.content === '$train') {
       message.channel.send('Starting training..');
-      const messages = await fetchMessages(message);
-
-      messages.forEach((msg) => {
-        markov.train(
-          msg.id,
-          msg.authorId,
-          msg.content,
-          Number(process.env.MARKOV_CHAIN_ORDER)
-        );
-      });
+      await fetchMessages(message);
     }
 
     if (message.content.startsWith('#')) {
