@@ -223,4 +223,33 @@ export class SqLiteTrainingModel implements TrainingModel {
       );
     });
   }
+  public getNextFragsLike(sequence: string[], like: string): Promise<Limit[]> {
+    return new Promise((resolve, reject) => {
+      const appendices: Limit[] = [];
+
+      this.db.each(
+        `
+        SELECT * FROM llimit WHERE
+        token LIKE ?
+      `,
+        `%${like}%`,
+        (err, row) => {
+          if (err) return reject(err);
+
+          appendices.push({
+            count: row.count,
+            entity: row.entity,
+            sequence: JSON.parse(row.sequence),
+            is_start: row.is_start ? true : false,
+            is_end: row.is_end ? true : false,
+            token: row.token,
+          });
+        },
+        (err) => {
+          if (err) return reject(err);
+          else return resolve(appendices);
+        }
+      );
+    });
+  }
 }

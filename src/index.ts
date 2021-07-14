@@ -42,6 +42,22 @@ async function main() {
       });
     }
 
+    if (message.content.startsWith('#')) {
+      const like = message.content.split(' ')[1];
+      try {
+        const m = await markov.concoctLike(
+          [],
+          Number(process.env.MARKOV_CHAIN_ORDER),
+          like
+        );
+
+        message.channel.send(m);
+      } catch (e) {
+        message.channel.send("can't find that word");
+        logger.warn(e);
+      }
+    }
+
     if (message.content.startsWith('$')) {
       const entity = message.mentions.users.find((user) => {
         return user.bot === false;

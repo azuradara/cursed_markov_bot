@@ -4,6 +4,7 @@ export interface TrainingModel {
   getNextFrags(entity: string, sequence: string[]): Promise<Limit[]>;
   getEntityAgnosticStartFrags(): Promise<Limit[]>;
   getEntityAgnosticNextFrags(sequence: string[]): Promise<Limit[]>;
+  getNextFragsLike(sequence: string[], like: string): Promise<Limit[]>;
 
   upsertLimit(
     entity: string,
